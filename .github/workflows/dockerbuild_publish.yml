@@ -27,7 +27,7 @@ jobs:
           password: ${{ secrets.DOCKERTOKEN }}
     
           
-      - if: github.event.inputs.tag == 'latest'
+      -
         name: Build and push
         uses: docker/build-push-action@v3
         with:
@@ -35,10 +35,3 @@ jobs:
           push: true
           tags: ubnalluri/githubaction:latest
           
-      - if: github.event.inputs.tag != 'latest'
-        name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          tags: ubnalluri/githubaction:${{ github.event.inputs.tag }}
