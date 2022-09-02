@@ -8,7 +8,12 @@ on:
     branches: [ "main" ]
 
   workflow_dispatch:
-
+    inputs:
+      tag:
+        description: 'tag'
+        required: true
+        default: 'latest'
+          
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,4 +34,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ubnalluri/githubaction:latest
+          tags: ubnalluri/githubaction:${{ github.event.inputs.tag }}
