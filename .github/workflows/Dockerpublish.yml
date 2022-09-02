@@ -3,7 +3,7 @@ name: Docker Build and Publish Image
 
 on:
   schedule:
-    - cron: '35 14 * * *'
+    - cron: '38 14 * * *'
     
   push:
     branches: [ "main" ]
@@ -12,6 +12,7 @@ on:
     
     paths: 
       - "Dockerpublish.yml"
+      - "!docker-image.yml"
 
   workflow_dispatch:
     inputs:
