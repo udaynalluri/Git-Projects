@@ -42,3 +42,10 @@ jobs:
           context: .
           push: true
           tags: ubnalluri/githubaction:latest
+          
+      -
+        name: upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.0
+        with:
+          name: dockerbuildartifact
+          path: ${{ github }}
