@@ -43,9 +43,20 @@ jobs:
           push: true
           tags: ubnalluri/githubaction:latest
           
-      -
-        name: upload a Build Artifact
-        uses: actions/upload-artifact@v2.2.0
+      - name: Step 1 - Create a temporary artifact download floder
+        run: mkdir downloads
+        
+      - name: Step 2 - Add artifacts to publish to the temp folder
+        run: 
+          cd downloads
+          echo 'alpha'    > alpha.html
+          echo 'bravo'    > bravo.html
+          echo 'charlie'  > charlie.html
+          cd ..
+      
+      - name: Step 3 - Use the upload Artifact GitHub Action
+        uses: actions/upload-artifact@v2
         with:
-          name: dockerbuildartifact
-          path: ${{ env.artifactPath }}
+          name: dockerartifact
+          path: downloads
+          
