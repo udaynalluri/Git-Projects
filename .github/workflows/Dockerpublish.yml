@@ -20,6 +20,9 @@ on:
         description: 'tag'
         required: true
         default: 'latest'
+env:
+  JFROG_URL: https://newapp.jfrog.io/artifactory/
+  JFROG_ARTIFACT_DIR: newapp
           
 jobs:
   build:
@@ -43,20 +46,15 @@ jobs:
           push: true
           tags: ubnalluri/githubaction:latest
           
-      - name: Step 1 - Create a temporary artifact download floder
-        run: mkdir downloads
-        
-      - name: Step 2 - Add artifacts to publish to the temp folder
-        run: |
-          cd downloads
-          echo 'alpha'    > alpha.html
-          echo 'bravo'    > bravo.html
-          echo 'charlie'  > charlie.html
-          cd ..
-      
-      - name: Step 3 - Use the upload Artifact GitHub Action
-        uses: actions/upload-artifact@v2
-        with:
-          name: dockerartifact
-          path: downloads
+      # Upload artifacts
+      - uses: jfrog/setup-jfrog-cli@v1.2.0
+        name: Setup JFrog CLI
+      - name: Setup JFrog Credentials
+        run: jfrog config add --artifactory-url=${{ env.JFROG_URL }} --user='${{ secrets.JFROG_USER }}' --password='${{ secrets.JFROG_PASSWORD }}'
+      ## IF using JFrog Access Tokens: 
+#       - name: Setup JFrog Credentials
+#         run: jfrog config add --artifactory-url=${{ env.JFROG_URL }} --access-token='${{ secrets.DEVOPS_DEMO_JFROG_TOKEN }}'
+      - name: Upload JFrog Artifacts
+        shell: bash
+        run: jfrog rt u "newapp/example.zip" "$JFROG_ARTIFACT_DIR/$GITHUB_RUN_ID/"
           
