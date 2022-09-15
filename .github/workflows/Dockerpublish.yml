@@ -22,7 +22,7 @@ on:
         default: 'latest'
 env:
   JFROG_URL: https://newapp.jfrog.io/artifactory/
-  JFROG_ARTIFACT_DIR: newapp
+  JFROG_ARTIFACT_DIR: newapp-maven-remote-cache
           
 jobs:
   build:
