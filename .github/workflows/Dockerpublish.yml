@@ -22,7 +22,7 @@ on:
         default: 'latest'
 env:
   JFROG_URL: https://newapp.jfrog.io/artifactory/
-  JFROG_ARTIFACT_DIR: newapp-maven-remote-cache
+  JFROG_ARTIFACT_DIR: newapp
           
 jobs:
   build:
@@ -56,5 +56,5 @@ jobs:
 #         run: jfrog config add --artifactory-url=${{ env.JFROG_URL }} --access-token='${{ secrets.DEVOPS_DEMO_JFROG_TOKEN }}'
       - name: Upload JFrog Artifacts
         shell: bash
-        run: jfrog rt u "newapp-maven-remote-cache/" "$JFROG_ARTIFACT_DIR/$GITHUB_RUN_ID/"
+        run: jfrog rt u "new-app-docker-remote/" "$JFROG_ARTIFACT_DIR/$GITHUB_RUN_ID/"
           
