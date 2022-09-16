@@ -1,6 +1,6 @@
 name: Docker Build and Publish Image
 
-    
+on:
   push:
     branches: [ "main" ]
   pull_request:
