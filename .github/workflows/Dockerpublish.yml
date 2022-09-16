@@ -45,7 +45,8 @@ jobs:
         name: Build and push 🐳
         id: docker_build
         uses: docker/build-push-action@v2
-      - run: jfrog rt docker-push newapp.jfrog.io/my-docker-image:latest new-app-docker-remote #--build-name=docker-build --build-number=1.0.0
+      - run: jf rt ping --url=https://newapp.jfrog.io/new-app-docker-remote
+      - run: jfrog rt docker-push newapp.jfrog.io/my-docker-image:latest new-app-docker-remote --url=https://newapp.jfrog.io/new-app-docker-remote #--build-name=docker-build --build-number=1.0.0 
 #         with:
 #           push: true
 #           tags: newapp.jfrog.io/new-app-docker-remote:latest
